@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+  has_many :entries, class_name: Entry.name, dependent: :destroy
   attr_accessor :remember_token
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -31,6 +32,10 @@ class User < ActiveRecord::Base
 
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def feed
+    Entry.where("user_id = ?", id)
   end
 
 end
