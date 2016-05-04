@@ -47,7 +47,9 @@ class User < ActiveRecord::Base
   end
 
   def feed
-    Entry.where("user_id = ?", id)
+     Entry.where("user_id IN (:following_ids) OR user_id = :user_id",
+                    following_ids: following_ids, user_id: id)
+
   end
 
   # Follows a user.

@@ -9,7 +9,7 @@ class EntriesController < ApplicationController
     def show
      @entry = Entry.find(params[:id])
      @comment = current_user.comments.build
-     @comments = @entry.comments.all
+     @comments = @entry.comments
     end
 
    def create

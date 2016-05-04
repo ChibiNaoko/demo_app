@@ -1,0 +1,8 @@
+<% if @comment.errors.any? %>
+  $("#comment-error-<%= @entry.id %>")
+    .html("<%= escape_javascript(render('shared/error_messages', object: @comment)) %>");
+<% else %>
+  $("#comment-list-<%= @entry.id %>")
+    .append("<%= escape_javascript(render('comment', comment: @comment)) %>");
+  $('.comment-body-<%= @entry.id %>').val('');
+<% end %>

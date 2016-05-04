@@ -14,23 +14,21 @@ class CommentsController < ApplicationController
 
   def create
     @comment = current_user.comments.build(comment_params)
-    @entry = Entry.find_by_id @comment.entry_id
-    if current_user = @entry.user or current_user.following.include?(@entry.user)
-      @comments = @entry.comments.all
+    @entry = Entry.find @comment.entry_id
 
-#      @comments = @entry.comments.all
+    if @comment.save
+      @comments = @entry.comments.all
     else
       flash[:danger] = "You need follow to comment"
-      redirect_to @comment.entry
-      return
     end
-    if @comment.save
-      redirect_to @comment.entry
+
+    respond_to do |format|
+      format.html {redirect_to @comment.entry}
+      format.js {flash.clear}
     end
   end
 
   def destroy
-
   end
 
   private
