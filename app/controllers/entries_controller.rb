@@ -3,6 +3,14 @@ class EntriesController < ApplicationController
    before_action :logged_in_user, only: [:create, :destroy]
    before_action :correct_user,   only: :destroy
 
+   def index
+   end
+
+    def show
+     @entry = Entry.find(params[:id])
+     @comment = current_user.comments.build
+     @comments = @entry.comments.all
+    end
 
    def create
       @entry = current_user.entries.build(entry_params)

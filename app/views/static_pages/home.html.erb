@@ -21,8 +21,28 @@
 
   </div>
 <% else %>
-<div class="center jumbotron">
-    <h1>Blog of Totto Chan</h1>
-
+<!-- <div class="center jumbotron">
+    <h1>Blog of Totto Chan</h1> -->
+    <div class="row">
+      <div class="col-md-8 col-offset-2">
+        <% @entries.each do |entry| %>
+          <div class="home_entry">
+            <p><%= entry.title %></p>
+            <p><%= entry.body %></p>
+            <p><%= entry.created_at %></p>
+            <% @comments = entry.comments.all
+            @comments.each do |comment| %>
+              <div class="home_cmt">
+                <strong><%= comment.user.name %></strong> said:
+                </br>
+                <p><%= comment.body %></p>
+                <p><%= comment.created_at %></p>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <%= will_paginate @entries %>
+    </div>
 <% end %>
 

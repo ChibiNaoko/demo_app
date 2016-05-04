@@ -42,6 +42,10 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def following? other_user
+    self.following.include?(other_user)
+  end
+
   private
 
     def user_params

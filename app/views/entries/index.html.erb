@@ -1,0 +1,11 @@
+<% provide(:title, 'h') %>
+<div class="row">
+  <aside class="col-md-6 col-offset-3">
+    <section>
+      <p><%= @entry.title %></p>
+      <p><%= @entry.body %></p>
+    </section>
+    <section class="stats">
+      <%= render 'shared/comment_form' %>
+    </section>
+  </aside>

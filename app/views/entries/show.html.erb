@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-6">
+    <section>
+      <p><%= @entry.title %></p>
+      <p><%= @entry.body %></p>
+    </section>
+    </br>
+    <h3>Comments: </h3>
+    <% @comments.each do |comment| %>
+      <strong><%= comment.user.name %></strong> said:
+      </br>
+      <p><%= comment.body %></p>
+      <p><%= comment.created_at %></p>
+    <% end %>
+  </div>
+</div>
+<%= render 'shared/comment_form' %>

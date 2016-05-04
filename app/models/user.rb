@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
 
+  has_many :comments, dependent: :destroy
   has_many :entries, class_name: Entry.name, dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                   dependent:   :destroy
-   has_many :passive_relationships, class_name: "Relationship",
+  has_many :passive_relationships, class_name: "Relationship",
                                   foreign_key: "followed_id",
                                   dependent:   :destroy
   has_many :following, through: :active_relationships, source: :followed
