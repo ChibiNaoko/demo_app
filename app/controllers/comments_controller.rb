@@ -15,8 +15,10 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(comment_params)
     @entry = Entry.find_by_id @comment.entry_id
-    if current_user.following.include?(@entry.user)
+    if current_user = @entry.user or current_user.following.include?(@entry.user)
       @comments = @entry.comments.all
+
+#      @comments = @entry.comments.all
     else
       flash[:danger] = "You need follow to comment"
       redirect_to @comment.entry
